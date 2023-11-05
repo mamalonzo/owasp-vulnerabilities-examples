@@ -1,0 +1,5 @@
+200 INFO: GET /
+200 INFO: GET /number?number=1
+400 ERROR: Failed to parse value GET /number?number=c
+200 INFO: GET /
+400 ERROR: Failed to parse value GET /number?number=a

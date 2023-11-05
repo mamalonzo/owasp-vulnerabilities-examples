@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Page</title>
+  <!-- CSS Library author: Bootstrap v5.3.2 (https://getbootstrap.com/) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="card profile-header">
+    <div class="body">
+      <div class="row">
+          <div class="col-lg-4 col-md-4 col-12">
+              <div class="profile-image float-md-right" id="sender-image-large">
+                <img src="default-icon.png" alt="My Profile Image" id="profile-picture">
+              </div>
+          </div>
+          <div class="col-lg-8 col-md-8 col-12">
+            <form id="profile-form" class="flex-nowrap">
+
+              <div class="form-floating">
+                <input type="text" id="name" class="form-control" value="<%= user.name %>">
+                <label for="name">Name: </label>
+              </div>
+              <div class="form-floating">
+                <textarea id="bio" class="form-control"><%= user.bio %></textarea>
+                <label for="bio">Bio: </label>
+              </div>
+              <div class="form-floating">
+                <input type="email" id="email" class="form-control" value="<%= user.email %>">
+                <label for="email">Email: </label>
+              </div>
+          
+              <button type="submit" class="btn btn-primary mb-1" id="update-profile">Update Profile</button>
+            </form>
+          </div>
+        </div>
+    </div>
+  </div>
+  <script>
+    document.getElementById("update-profile").addEventListener("click", (event) => {
+      event.preventDefault();
+      const name = document.getElementById("name").value;
+      if (name.trim().length == 0) {
+        console.log("Name cannot be empty");
+        return;
+      }
+      const email = document.getElementById("email").value;
+      if (email.trim().length == 0) {
+        console.log("Email cannot be empty");
+        return;
+      } else if (/^\S+@\S+\.\S+$/.test(email) == false) {
+        console.log("Email is invalid");
+        return;
+      }
+      const bio = document.getElementById("bio").value;
+      const matches = window.location.href.match(/userId=(\d+)/);
+      const userId = matches[1];
+      fetch("/profile?userId=" + userId, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, bio }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.error) {
+            console.log(data.error);
+          } else {
+            window.location.href = "/profile?userId=" + userId;
+          }
+        });
+    });
+  </script>
+</body>
+</html>

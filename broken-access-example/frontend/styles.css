@@ -1,0 +1,52 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #fafafa;
+  height: 100%;
+  font-family: -apple-system, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+header, footer {
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  border-top: 1px solid #eee;
+  height: 10vh;
+  background-color: white;
+}
+
+#login-button, #register-button {
+background-color: purple;
+color: white;
+width: 100%;
+border-radius: 4px;
+font-weight: bold;
+padding: 10px;
+margin-bottom: 1rem;
+}
+
+#login-form, #register-form {
+  max-width: 400px;
+  padding: 1rem;
+  margin: auto;
+  text-align: center;
+}
+
+.form-floating {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+#activate-register, #activate-login {
+  background: none;
+  border: none;
+  color: blue;
+  text-decoration: underline;
+}
+
+#login-form {
+  display: block;
+}
+
+#register-form {
+  display: none;
+}
