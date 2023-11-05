@@ -1,0 +1,6 @@
+npm install ejs
+npm install esm
+npm install nodemon
+npm install express
+npm install path
+npm install sqlite3

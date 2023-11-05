@@ -1,0 +1,5 @@
+npm install nodemon
+npm install esm
+npm install express
+npm install cors
+npm install body-parser
